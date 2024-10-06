@@ -1,11 +1,14 @@
 import express from 'express'
-import { addEmp, loginAdmin } from '../controllers/adminController.js'
+import { addEmp, allEmps, loginAdmin } from '../controllers/adminController.js'
 import upload from '../middlewares/multer.js'
 import authAdmin from '../middlewares/authAdmin.js'
+import { changeAvailability } from '../controllers/empController.js'
 
 const adminRouter = express.Router()
 
 adminRouter.post('/add-emp',authAdmin, upload.single('image'), addEmp)
 adminRouter.post('/login', loginAdmin)
+adminRouter.post('/all-emps', authAdmin, allEmps)
+adminRouter.post('/change-availability', authAdmin, changeAvailability)
 
 export default adminRouter

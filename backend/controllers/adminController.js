@@ -74,4 +74,15 @@ const loginAdmin = async (req,res) => {
     }
 }
 
-export {addEmp, loginAdmin}
+// API to get all employees for admin panel
+const allEmps = async (req,res) => {
+    try {
+        const employees = await empModel.find({}).select('-password')
+        res.json({success:true, employees})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message:error.message})
+    }
+}
+
+export {addEmp, loginAdmin, allEmps}

@@ -5,6 +5,7 @@ import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
 import adminRouter from './routes/adminRoute.js'
 import empRouter from './routes/empRoute.js'
+import userRouter from './routes/userRoute.js'
 
 // app config
 const app = express()
@@ -19,7 +20,7 @@ app.use(cors())
 // api endpoints
 app.use('/api/admin', adminRouter)
 app.use('/api/employee', empRouter)
-// localhost:4000/api/admin/add-emp
+app.use('/api/user', userRouter)
 
 app.get('/',(req,res)=>{
     res.send('api working')

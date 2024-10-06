@@ -8,10 +8,7 @@ const AppContextProvider = (props) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [employees,setEmployees] = useState([])
-    
-    const value = {
-        employees
-    }
+    const [token,setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : false)
 
     const getEmpData = async () => {
         try {
@@ -26,6 +23,13 @@ const AppContextProvider = (props) => {
             console.log(error);
             toast.error(error.message)
         }
+    }
+
+    const value = {
+        employees,
+        token,
+        setToken,
+        backendUrl
     }
 
     useEffect(()=>{

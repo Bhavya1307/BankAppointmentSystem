@@ -91,7 +91,7 @@ const Appointment = () => {
           </p>
           <div className='flex items-center gap-2 text-sm mt-1 text-gray-600'>
             <p>{empInfo.degree} - {empInfo.position}</p>
-            <button className='py-0.5 px-2 border text-xs rounded-full'>{empInfo.experience}</button>
+            <button className='py-0.5 px-2 border text-xs rounded-full'>{empInfo.experience} Year</button>
           </div>
 
           <p className='flex items-center gap-1 text-sm font-medium text-gray-900 mt-3'>About <img className='w-3.5' src={assets.info_icon} alt="" /></p>

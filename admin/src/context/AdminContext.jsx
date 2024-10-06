@@ -13,7 +13,7 @@ const AdminContextProvider = (props) => {
 
     const getAllEmps = async () => {
         try {
-            const {data} = await axios.post(backendUrl + 'api/admin/all-emps', {}, {headers:{aToken}})
+            const {data} = await axios.post(backendUrl + '/api/admin/all-emps', {}, {headers:{aToken}})
             if (data.success) {
                 setEmployees(data.employees)
                 console.log(data.employees)
@@ -25,10 +25,24 @@ const AdminContextProvider = (props) => {
         }
     }
 
+    const changeAvailability = async (empId) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/admin/change-availability', {empId}, {headers:{aToken}})
+            if (data.success) {
+                toast.success(data.message)
+                getAllEmps()
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     const value = {
         aToken,setAToken,
         backendUrl, employees, 
-        getAllEmps
+        getAllEmps, changeAvailability
     }
 
     return (

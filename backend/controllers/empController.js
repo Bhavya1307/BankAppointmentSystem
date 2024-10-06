@@ -12,4 +12,15 @@ const changeAvailability = async (req,res) => {
     }
 }
 
-export {changeAvailability}
+const empList = async (req,res) => {
+    try {
+        const employees = await empModel.find({}).select(['-password', '-email'])
+
+        res.json({success:true, employees})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+}
+
+export {changeAvailability, empList}

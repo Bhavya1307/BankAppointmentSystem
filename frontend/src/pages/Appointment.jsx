@@ -3,13 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
 import RelatedEmp from '../components/RelatedEmp'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import axios from 'axios'
 
 const Appointment = () => {
 
-  const {empId} = useParams()
-  const {employees, backendUrl, token, getEmpData} = useContext(AppContext)
+  const { empId } = useParams()
+  const { employees, backendUrl, token, getEmpData } = useContext(AppContext)
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
   const navigate = useNavigate()
@@ -30,15 +30,15 @@ const Appointment = () => {
     // getting current date
     let today = new Date()
 
-    for(let i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       // getting date with index
       let currentDate = new Date(today)
-      currentDate.setDate(today.getDate()+i)
+      currentDate.setDate(today.getDate() + i)
 
       // setting end time of the date with index
       let endTime = new Date()
-      endTime.setDate(today.getDate()+i)
-      endTime.setHours(21,0,0,0)
+      endTime.setDate(today.getDate() + i)
+      endTime.setHours(21, 0, 0, 0)
 
       // setting hours
       if (today.getDate() === currentDate.getDate()) {
@@ -52,14 +52,25 @@ const Appointment = () => {
 
       let timeSlots = []
 
-      while(currentDate < endTime) {
+      while (currentDate < endTime) {
         let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-        // adding slot to array
-        timeSlots.push({
-          datetime: new Date(currentDate),
-          time: formattedTime
-        })
+        let day = currentDate.getDate()
+        let month = currentDate.getMonth() + 1
+        let year = currentDate.getFullYear()
+
+        const slotDate = day + "_" + month + "_" + year
+        const slotTime = formattedTime
+
+        const isSlotAvailable = empInfo.slots_booked[slotDate] && empInfo.slots_booked[slotDate].includes(slotTime) ? false : true
+
+        if (isSlotAvailable) {
+          // adding slot to array
+          timeSlots.push({
+            datetime: new Date(currentDate),
+            time: formattedTime
+          })
+        }
 
         // Incrementing current time by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30)
@@ -76,16 +87,16 @@ const Appointment = () => {
     }
 
     try {
-      
+
       const date = empSlots[slotIndex][0].datetime
 
       let day = date.getDate()
-      let month = date.getMonth()+1
+      let month = date.getMonth() + 1
       let year = date.getFullYear()
 
       const slotDate = day + "_" + month + "_" + year
 
-      const { data } = await axios.post(backendUrl + '/api/user/book-appointment', {empId, slotDate, slotTime}, {headers:{token}})
+      const { data } = await axios.post(backendUrl + '/api/user/book-appointment', { empId, slotDate, slotTime }, { headers: { token } })
       if (data.success) {
         toast.success(data.message)
         getEmpData()
@@ -100,15 +111,15 @@ const Appointment = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchEmpInfo()
-  },[employees,empId])
+  }, [employees, empId])
 
-  useEffect(()=>{
+  useEffect(() => {
     getAvailableSlots()
-  },[empInfo])
+  }, [empInfo])
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(empSlots);
   }, [empSlots])
 
@@ -140,8 +151,8 @@ const Appointment = () => {
         <p>Booking slots</p>
         <div className='flex gap-3 items-center w-full overflow-x-scroll mt-4'>
           {
-            empSlots.length && empSlots.map((item,index)=>(
-              <div onClick={()=> setSlotIndex(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'border border-gray-200'}`} key={index}>
+            empSlots.length && empSlots.map((item, index) => (
+              <div onClick={() => setSlotIndex(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'border border-gray-200'}`} key={index}>
                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                 <p>{item[0] && item[0].datetime.getDate()}</p>
               </div>
@@ -149,8 +160,8 @@ const Appointment = () => {
           }
         </div>
         <div className='flex items-center gap-3 w-full overflow-x-scroll mt-4'>
-          {empSlots.length && empSlots[slotIndex].map((item,index)=>(
-            <p onClick={()=>setSlotTime(item.time)} className={`text-sm font-light text-gray-900 flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'text-gray-400 border border-gray-300'}`} key={index}>
+          {empSlots.length && empSlots[slotIndex].map((item, index) => (
+            <p onClick={() => setSlotTime(item.time)} className={`text-sm font-light text-gray-900 flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'text-gray-400 border border-gray-300'}`} key={index}>
               {item.time.toLowerCase()}
             </p>
           ))}
@@ -158,8 +169,8 @@ const Appointment = () => {
         <button onClick={bookAppointment} className='bg-gradient-to-r from-primary to-emerald-500 text-white text-sm font-light px-14 py-3 rounded-full my-6'>Book an appointment</button>
       </div>
 
-          {/* related employees */}
-          <RelatedEmp empId={empId} speciality={empInfo.speciality} />
+      {/* related employees */}
+      <RelatedEmp empId={empId} speciality={empInfo.speciality} />
     </div>
   )
 }

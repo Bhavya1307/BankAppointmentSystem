@@ -44,7 +44,7 @@ const AppContextProvider = (props) => {
     }
 
     const value = {
-        employees,
+        employees, getEmpData,
         token,
         setToken,
         backendUrl,

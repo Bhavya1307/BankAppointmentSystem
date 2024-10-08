@@ -30,6 +30,11 @@ const Appointment = () => {
     // getting current date
     let today = new Date()
 
+    if (!empInfo || !empInfo.slots_booked) {
+      // Early return if empInfo or slots_booked is null/undefined
+      return;
+    }
+
     for (let i = 0; i < 7; i++) {
       // getting date with index
       let currentDate = new Date(today)
@@ -141,7 +146,7 @@ const Appointment = () => {
           </div>
 
           <p className='flex items-center gap-1 text-sm font-medium text-gray-900 mt-3'>About <img className='w-3.5' src={assets.info_icon} alt="" /></p>
-          <p className='text-sm text-gray-500 max-w-[700px] mt-1'>{empInfo.about}</p>
+          <p className='text-sm text-gray-500 max-w-[800px] mt-1'>{empInfo.about}</p>
         </div>
       </div>
 

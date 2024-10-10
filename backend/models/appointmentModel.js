@@ -8,8 +8,8 @@ const appointmentSchema = new mongoose.Schema({
     userData: { type:Object, required: true },
     empData: { type:Object, required: true },
     date: { type:Number, required: true },
-    cancelled: { type:Boolean, required: false },
-    isCompleted: { type:Boolean, required: false }
+    cancelled: { type:Boolean, default: false },
+    isCompleted: { type:Boolean, default: false }
 })
 
 const appointmentModel = mongoose.models.appointment || mongoose.model('appointment', appointmentSchema)

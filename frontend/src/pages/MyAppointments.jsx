@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 const MyAppointments = () => {
 
-  const { backendUrl, token } = useContext(AppContext)
+  const { backendUrl, token, getEmpData } = useContext(AppContext)
 
   const [appointments, setAppointmets] = useState([])
   const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -24,6 +24,25 @@ const MyAppointments = () => {
         setAppointmets(data.appointments.reverse())
         console.log(data.appointments);
       }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
+
+  const cancelAppointment = async (appointmentId) => {
+    try {
+      
+      const {data} = await axios.post(backendUrl + '/api/user/cancel-appointment', {appointmentId}, {headers:{token}})
+      if(data.success) {
+        toast.success(data.message)
+        getUserAppointments()
+        getEmpData()
+      } else {
+        toast.error(data.message)
+      }
+      
 
     } catch (error) {
       console.log(error);
@@ -56,8 +75,9 @@ const MyAppointments = () => {
             </div>
             <div></div>
             <div className='flex flex-col gap-2 justify-center'>
-              <button className='text-sm text-center sm:min-w-48 py-2 border rounded bg-gradient-to-r from-primary to-emerald-500 text-white hover:scale-105 transition-all duration-300'>Reschedule appointment</button>
-              <button className='text-sm text-white bg-red-500 text-center sm:min-w-48 py-2 border rounded hover:scale-105 transition-all duration-300'>Cancel appointment</button>
+              {!item.cancelled && <button className='text-sm text-center sm:min-w-48 py-2 border rounded bg-gradient-to-r from-primary to-emerald-500 text-white hover:scale-105 transition-all duration-300'>Reschedule appointment</button>}
+              {!item.cancelled && <button onClick={()=>cancelAppointment(item._id)} className='text-sm text-white bg-red-500 text-center sm:min-w-48 py-2 border rounded hover:scale-105 transition-all duration-300'>Cancel appointment</button>}
+              {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled!</button>}
             </div>
           </div>
         ))}

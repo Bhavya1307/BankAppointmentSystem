@@ -4,6 +4,7 @@ import { v2 as cloudinary} from "cloudinary"
 import empModel from "../models/empModel.js"
 import jwt from "jsonwebtoken"
 import appointmentModel from "../models/appointmentModel.js"
+import userModel from "../models/userModel.js"
 
 // api for adding employee
 const addEmp = async (req,res) => {
@@ -128,4 +129,28 @@ const appointmentCancel = async (req,res) => {
     }
 }
 
-export {addEmp, loginAdmin, allEmps, appointmentsAdmin, appointmentCancel}
+// API to get dashboard data for admin
+const adminDashboard = async (req,res) => {
+    try {
+
+        const employees = await empModel.find({})
+        const users = await userModel.find({})
+        const appointments = await appointmentModel.find({})
+
+        const dashData = {
+            employees: employees.length,
+            appointments: appointments.length,
+            clients: users.length,
+            latestAppointments: appointments.reverse().slice(0,5)
+        }
+            
+        res.json({success:true, dashData})
+        
+        
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export {addEmp, loginAdmin, allEmps, appointmentsAdmin, appointmentCancel, adminDashboard}

@@ -13,8 +13,6 @@ import verified_icon from './verified_icon.svg'
 import arrow_icon from './arrow_icon.svg'
 import info_icon from './info_icon.svg'
 import upload_icon from './upload_icon.png'
-import stripe_logo from './stripe_logo.png'
-import razorpay_logo from './razorpay_logo.png'
 import emp1 from './1.png'
 import emp2 from './2.png'
 import emp3 from './3.png'
@@ -53,9 +51,7 @@ export const assets = {
     menu_icon,
     cross_icon,
     dropdown_icon,
-    upload_icon,
-    stripe_logo,
-    razorpay_logo
+    upload_icon
 }
 
 export const specialityData = [

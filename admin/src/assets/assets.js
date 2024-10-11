@@ -9,7 +9,6 @@ import upload_area from './upload_area.svg'
 import list_icon from './list_icon.svg'
 import tick_icon from './tick_icon.svg'
 import appointments_icon from './appointments.png'
-import earning_icon from './earning_icon.svg'
 import user_icon from './users.png'
 
 export const assets = {
@@ -24,6 +23,5 @@ export const assets = {
     people_icon,
     list_icon,
     tick_icon,
-    appointments_icon,
-    earning_icon
+    appointments_icon
 }

@@ -19,7 +19,7 @@ const Dashboard = () => {
     <div className='m-5'>
       <div className='flex flex-wrap gap-4'>
         <div className='flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all duration-500'>
-          <img className='w-14' src={assets.doctor_icon} alt="" />
+          <img className='w-20' src={assets.staff_icon} alt="" />
           <div>
             <p className='text-xl font-semibold text-gray-600'>{dashData.employees}</p>
             <p className='text-gray-500'>Staff Members</p>
@@ -27,7 +27,7 @@ const Dashboard = () => {
         </div>
 
         <div className='flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all duration-500'>
-          <img className='w-14' src={assets.patients_icon} alt="" />
+          <img className='w-20' src={assets.user_icon} alt="" />
           <div>
             <p className='text-xl font-semibold text-gray-600'>{dashData.clients}</p>
             <p className='text-gray-500'>Users</p>
@@ -35,7 +35,7 @@ const Dashboard = () => {
         </div>
 
         <div className='flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all duration-500'>
-          <img className='w-14' src={assets.appointments_icon} alt="" />
+          <img className='w-20' src={assets.appointments_icon} alt="" />
           <div>
             <p className='text-xl font-semibold text-gray-600'>{dashData.appointments}</p>
             <p className='text-gray-500'>Appointments</p>

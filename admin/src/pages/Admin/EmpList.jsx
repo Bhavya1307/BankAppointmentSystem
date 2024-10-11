@@ -18,7 +18,7 @@ const EmpList = () => {
         {
           employees.map((item,index)=>(
             <div className='border border-green-200 rounded-xl max-w-56 overflow-hidden cursor-pointer' key={index}>
-              <img className='bg-green-50 hover:bg-gradient-to-r from-primary to-emerald-500 transition-all duration-500' src={item.image} alt="" />
+              <img className='bg-green-50 hover:bg-gradient-to-r from-primary to-emerald-500 transition-all duration-500' src={item.image} alt="Staff member's profile image" />
               <div className='p-4'>
                 <p className='text-neutral-800 text-lg font-medium'>{item.name}</p>
                 <p className='text-zinc-600 text-sm'>{item.position}</p>

@@ -222,4 +222,47 @@ const cancelAppointment = async (req,res) => {
     }
 }
 
-export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment }
+// API to reschedule appointment
+const rescheduleAppointment = async (req, res) => {
+    try {
+        const { userId, appointmentId, newSlotDate, newSlotTime } = req.body
+
+        const appointmentData = await appointmentModel.findById(appointmentId)
+
+        // Verifying appointment user
+        if (appointmentData.userId !== userId) {
+            return res.json({ success: false, message: "Unauthorized action" })
+        }
+
+        // Making old slot available
+        const { empId, slotDate: oldSlotDate, slotTime: oldSlotTime } = appointmentData
+        const empData = await empModel.findById(empId)
+        let slots_booked = empData.slots_booked
+        slots_booked[oldSlotDate] = slots_booked[oldSlotDate].filter(e => e !== oldSlotTime)
+
+        // Booking new slot
+        if (slots_booked[newSlotDate]) {
+            if (slots_booked[newSlotDate].includes(newSlotTime)) {
+                return res.json({ success: false, message: "New slot not available" })
+            } else {
+                slots_booked[newSlotDate].push(newSlotTime)
+            }
+        } else {
+            slots_booked[newSlotDate] = [newSlotTime]
+        }
+
+        // Updating appointment
+        await appointmentModel.findByIdAndUpdate(appointmentId, { slotDate: newSlotDate, slotTime: newSlotTime })
+
+        // Updating employee slots
+        await empModel.findByIdAndUpdate(empId, { slots_booked })
+
+        res.json({ success: true, message: "Appointment rescheduled successfully!" })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, rescheduleAppointment }

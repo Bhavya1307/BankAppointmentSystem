@@ -10,16 +10,16 @@ const Header = () => {
             Book Appointment <br /> With Us Today!
         </p>
         <div className='flex flex-col md:flex-row items-center gap-3 text-white text-sm'>
-            <img className='w-28' src={assets.group_profiles} alt="" />
+            <img className='w-28' src={assets.group_profiles} alt="3 images of 3 different people in round shape" />
             <p>Simply browse through our extensive list of trusted members,<br className='hidden sm:block' /> schedule your appointment hustle-free.</p>
         </div>
         <a className='flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300' href="#speciality">
-            Book appointment <img className='w-3' src={assets.arrow_icon} alt="" />
+            Book appointment <img className='w-3' src={assets.arrow_icon} alt="Arrow pointing to the right" />
         </a>
       </div>
       {/* Right */}
       <div className='md:w-1/2 relative'>
-        <img className='w-full md:absolute bottom-0 h-auto rounded-lg' src={assets.header_img} alt="" />
+        <img className='w-full md:absolute bottom-0 h-auto rounded-lg' src={assets.header_img} alt="A women standing in betwwen two men wearing suits" />
       </div>
     </div>
   )

@@ -152,7 +152,7 @@ const MyAppointments = () => {
         {appointments.map((item, index) => (
           <div className='flex flex-col sm:flex-row gap-4 py-4 border-b' key={index}>
             <div className="sm:w-1/4">
-              <img className='w-full sm:w-32 bg-green-50 border border-green-200 rounded' src={item.empData.image} alt="" />
+              <img className='w-full sm:w-32 bg-green-50 border border-green-200 rounded' src={item.empData.image} alt="Staff member's profile image" />
             </div>
             <div className='flex-1 text-sm text-zinc-600'>
               <p className='text-neutral-800 font-semibold'>{item.empData.name}</p>

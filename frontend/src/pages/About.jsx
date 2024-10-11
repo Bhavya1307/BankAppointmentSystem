@@ -9,7 +9,7 @@ const About = () => {
       </div>
 
       <div className='my-10 flex flex-col md:flex-row gap-20'>
-        <img className='w-full md:max-w-[360px] rounded-xl' src={assets.about_image} alt="" />
+        <img className='w-full md:max-w-[360px] rounded-xl' src={assets.about_image} alt="A woman with folded hands in yellow suit" />
         <div className='flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600'>
           <p>Welcome to BankBuddy, your reliable partner in navigating your financial journey with ease and confidence. At BankBuddy, we understand the complexities of managing personal finances, whether it’s securing a loan, handling investments, or simply managing your daily banking needs.</p>
 

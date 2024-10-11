@@ -7,7 +7,7 @@ const Footer = () => {
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
         {/* Left */}
         <div>
-            <img className='mb-5 w-40' src={assets.logo} alt="" />
+            <img className='mb-5 w-40' src={assets.logo} alt="A logo with a bank icon and a text called BankBuddy in green shades" />
             <p className='w-full md:w-2/3 text-gray-600 leading-6'>Simply browse through our extensive list of trusted members, schedule your appointment hustle-free.</p>
         </div>
 

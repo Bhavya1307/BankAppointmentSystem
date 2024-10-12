@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 const Appointment = () => {
-
   const { empId } = useParams()
   const { employees, backendUrl, token, getEmpData } = useContext(AppContext)
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
@@ -18,6 +17,7 @@ const Appointment = () => {
   const [empSlots, setEmpSlots] = useState([])
   const [slotIndex, setSlotIndex] = useState(0)
   const [slotTime, setSlotTime] = useState('')
+  const [weatherForecast, setWeatherForecast] = useState(null)
 
   const fetchEmpInfo = async () => {
     const empInfo = employees.find(emp => emp._id === empId)
@@ -92,7 +92,6 @@ const Appointment = () => {
     }
 
     try {
-
       const date = empSlots[slotIndex][0].datetime
 
       let day = date.getDate()
@@ -109,12 +108,55 @@ const Appointment = () => {
       } else {
         toast.error(data.message)
       }
-
     } catch (error) {
       console.log(error);
       toast.error(error.message)
     }
   }
+
+  const fetchWeatherForecast = async (date) => {
+    const API_KEY = '44b670c2af79a6c9cc55c5534373fa6c';
+    const city = 'Toronto';
+
+    try {
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
+      const forecastList = response.data.list;
+
+      // Find the forecast for the selected date
+      const selectedDateForecast = forecastList.find(item => {
+        const forecastDate = new Date(item.dt * 1000);
+        return forecastDate.getDate() === date.getDate() &&
+          forecastDate.getMonth() === date.getMonth() &&
+          forecastDate.getFullYear() === date.getFullYear();
+      });
+
+      if (selectedDateForecast) {
+        setWeatherForecast({
+          temperature: selectedDateForecast.main.temp,
+          description: selectedDateForecast.weather[0].description,
+          icon: selectedDateForecast.weather[0].icon,
+        });
+      } else {
+        // If no forecast is available for the selected date
+        const lastForecast = forecastList[forecastList.length - 1];
+        setWeatherForecast({
+          temperature: lastForecast.main.temp,
+          description: lastForecast.weather[0].description,
+          icon: lastForecast.weather[0].icon,
+          isEstimate: true,
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching weather forecast:', error);
+      setWeatherForecast(null);
+    }
+  };
+
+  const handleDateSelection = (index) => {
+    setSlotIndex(index);
+    const selectedDate = empSlots[index][0].datetime;
+    fetchWeatherForecast(selectedDate);
+  };
 
   useEffect(() => {
     fetchEmpInfo()
@@ -151,19 +193,33 @@ const Appointment = () => {
       </div>
 
       {/* Booking slots */}
-
       <div className='sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700'>
         <p>Booking slots</p>
         <div className='flex gap-3 items-center w-full overflow-x-scroll mt-4'>
           {
             empSlots.length && empSlots.map((item, index) => (
-              <div onClick={() => setSlotIndex(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'border border-gray-200'}`} key={index}>
+              <div onClick={() => handleDateSelection(index)} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'border border-gray-200'}`} key={index}>
                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                 <p>{item[0] && item[0].datetime.getDate()}</p>
               </div>
             ))
           }
         </div>
+
+        {/* Weather Forecast */}
+        {weatherForecast && (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <h3 className="text-lg font-semibold">Weather Forecast</h3>
+            <div className="flex items-center">
+              <img src={`http://openweathermap.org/img/w/${weatherForecast.icon}.png`} alt="Weather icon" />
+              <p className="ml-2">
+                {weatherForecast.temperature}°C, {weatherForecast.description}
+                {weatherForecast.isEstimate}
+              </p>
+            </div>
+          </div>
+        )}
+
         <div className='flex items-center gap-3 w-full overflow-x-scroll mt-4'>
           {empSlots.length && empSlots[slotIndex].map((item, index) => (
             <p onClick={() => setSlotTime(item.time)} className={`text-sm font-light text-gray-900 flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-gradient-to-r from-primary to-emerald-500 text-white' : 'text-gray-400 border border-gray-300'}`} key={index}>

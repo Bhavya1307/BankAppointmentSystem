@@ -189,6 +189,13 @@ const Appointment = () => {
 
           <p className='flex items-center gap-1 text-sm font-medium text-gray-900 mt-3'>About <img className='w-3.5' src={assets.info_icon} alt="Info icon with a letter i in a circle" /></p>
           <p className='text-sm text-gray-500 max-w-[800px] mt-1'>{empInfo.about}</p>
+
+          <div className='mt-4 flex items-center gap-4'>
+            <div>
+              <p className='text-sm font-medium text-gray-900'>Languages</p>
+              <p className='text-sm text-gray-500 '>English, French</p>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import validator from 'validator'
-import bycrypt from 'bcrypt'
+import bcrypt from 'bcryptjs';
 import userModel from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
 import {v2 as cloudinary} from 'cloudinary'
@@ -27,8 +27,8 @@ const registerUser = async (req, res) => {
         }
 
         // Hashing the password
-        const salt = await bycrypt.genSalt(10)
-        const hashedPassword = await bycrypt.hash(password, salt)
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
 
         const userData = {
             name,

@@ -31,7 +31,7 @@ import emp15 from './15.png'
 import Account from './account.png'
 import Business from './business.png'
 import Loan from './loan.png'
-import Mortgage from './Mortgage.png'
+import Mortgage from './mortgage.png'
 import Investment from './invest.png'
 import Credit from './credit.png'
 

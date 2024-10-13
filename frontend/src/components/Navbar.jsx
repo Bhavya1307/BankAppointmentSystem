@@ -66,6 +66,7 @@ const Navbar = () => {
             <NavLink onClick={()=>setShowMenu(false)} to='/employees'><p className='px-4 py-2 rounded inline-block'>BOOK APPOINTMENT</p></NavLink>
             <NavLink onClick={()=>setShowMenu(false)} to='/about'><p className='px-4 py-2 rounded inline-block'>ABOUT</p></NavLink>
             <NavLink onClick={()=>setShowMenu(false)} to='/contact'><p className='px-4 py-2 rounded inline-block'>CONTACT</p></NavLink>
+            <NavLink onClick={()=>setShowMenu(false)} to='/login'><p className='px-4 py-2 rounded inline-block'>CREATE ACCOUNT</p></NavLink>
           </ul>
         </div>
       </div>

@@ -64,7 +64,7 @@ export const specialityData = [
         image: Mortgage
     },
     {
-        speciality: 'Savings and Checking Accounts',
+        speciality: 'Savings & Checking Accounts',
         image: Account
     },
     {

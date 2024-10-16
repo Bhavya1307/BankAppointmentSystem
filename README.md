@@ -5,9 +5,8 @@
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Installation](#installation)
-- [Live Link](#livelink)
+- [Live Link](#live-link)
 - [Future Improvements](#future-improvements)
-- [License](#license)
 
 ## Project Overview
 BankBuddy is a full-stack web application designed to simplify the process of scheduling, managing, and tracking bank appointments. Users can book appointments with available bank staff, reschedule or cancel them, and manage their profiles. The system also enables bank administrators to manage employee availability efficiently. By digitizing the appointment process, this application aims to improve customer experience and reduce wait times in bank branches.
@@ -69,3 +68,11 @@ BankBuddy is a full-stack web application designed to simplify the process of sc
 
 - Client side: https://bankappointmentsystem.onrender.com/
 - Admin side: https://bankappointmentsystem-admin.onrender.com/
+
+## Future Improvements
+
+- **Notifications:** Implement a notification system to alert users and staff of upcoming appointments or changes, such as reminders for booked appointments or cancellations.
+- **Bank Staff Side:** Develop a separate interface for bank staff to manage appointments, view schedules, and modify availability, streamlining the internal process.
+- **UI Improvements:** Enhance the user interface to provide a more modern, intuitive experience with better visuals and responsiveness.
+- **Guidelines:** Add clear guidelines or a user manual to help customers and staff easily navigate the system.
+- **Analytics:** Introduce reporting and analytics features to provide insights into appointment trends, helping bank staff manage resources effectively.

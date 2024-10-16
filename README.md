@@ -5,7 +5,6 @@
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Live Link](#livelink)
 - [Future Improvements](#future-improvements)
 - [License](#license)
@@ -65,3 +64,8 @@ BankBuddy is a full-stack web application designed to simplify the process of sc
 
    cd admin
    npm run dev
+
+## Live Link
+
+- Client side: https://bankappointmentsystem.onrender.com/
+- Admin side: https://bankappointmentsystem-admin.onrender.com/

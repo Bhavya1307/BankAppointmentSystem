@@ -11,7 +11,7 @@
 - [License](#license)
 
 ## Project Overview
-BankBuddy is a full-stack web application designed to simplify the process of scheduling, managing, and tracking bank appointments. Users can book appointments with available bank staff, reschedule or cancel them, and manage their profiles.
+BankBuddy is a full-stack web application designed to simplify the process of scheduling, managing, and tracking bank appointments. Users can book appointments with available bank staff, reschedule or cancel them, and manage their profiles. The system also enables bank administrators to manage employee availability efficiently. By digitizing the appointment process, this application aims to improve customer experience and reduce wait times in bank branches.
 
 ## Tech Stack
 - **Frontend:** React.js
@@ -34,3 +34,14 @@ BankBuddy is a full-stack web application designed to simplify the process of sc
 1. Clone the repository:
    ```bash
    git clone https://github.com/Bhavya1307/BankAppointmentSystem.git
+
+2. Install dependencies:
+   ```bash
+   cd frontend
+   npm install
+
+   cd backend
+   npm install
+
+   cd admin
+   npm install

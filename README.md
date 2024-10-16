@@ -45,3 +45,23 @@ BankBuddy is a full-stack web application designed to simplify the process of sc
 
    cd admin
    npm install
+
+3. Set up environment variables:
+   Create a .env file in the backend folder
+   ```bash
+   MONGO_URI=<your-mongodb-uri>
+   JWT_SECRET=<your-jwt-secret>
+   CLOUDINARY_CLOUD_NAME=<your-cloudinary-cloud-name>
+   CLOUDINARY_API_KEY=<your-cloudinary-api-key>
+   CLOUDINARY_API_SECRET=<your-cloudinary-api-secret>
+
+4. Run the application:
+   ```bash
+   cd frontend
+   npm run dev
+
+   cd backend
+   npm run server
+
+   cd admin
+   npm run dev
